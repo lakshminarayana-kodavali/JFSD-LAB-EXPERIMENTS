@@ -1,0 +1,7 @@
+SpringActuated: It is a dependency which provides production ready features for managing, monitoring project.
+
+SpringJPA: 
+ 	JPA-Java Perisistance API
+	It is a starter, it helps to interact with databases.
+Ex: JPA - Database connectivity
+

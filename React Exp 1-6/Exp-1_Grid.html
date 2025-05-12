@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Demo</title>
+    <style>
+        *{
+            padding: 0px;
+            margin:10px;
+        }
+        .container{
+            display: grid;
+            height: 100vh;
+            grid-column: 33% 33% 34% ;
+            grid-row: 10% 10% 80%;
+        }
+        .header{
+            height: 10vh;
+            background-color: aqua;
+            grid-column:1/4;
+            grid-row:1/2;
+        }
+        .search{
+            height: 10vh;
+            background-color :brown ;
+            grid-column:1/3;
+            grid-row:2/3;
+        }
+        .middle{
+            height: 80vh;
+            background-color: blue;
+            grid-column:2/3;
+            grid-row:3/4;
+        }
+        .lsb{
+            height: 80vh;
+            background-color: blueviolet;
+            grid-column:1/2;
+            grid-row:3/4;
+        }
+        .rsb{
+            height: 93vh;
+            background-color: chartreuse;
+            grid-column:3/4;
+            grid-row:2/4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Header</div>
+        <div class="search">Search</div>
+        <div class="lsb">Left side bar</div>
+        <div class="middle">Middle</div>
+        <div class="rsb">Right side bar</div>
+    </div>
+</body>
+</html>

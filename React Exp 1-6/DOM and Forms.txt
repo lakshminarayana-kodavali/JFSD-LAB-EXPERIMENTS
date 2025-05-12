@@ -1,0 +1,189 @@
+DOM
+-------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation</title>
+</head>
+<body>
+    <p id="id1"> Thid is Block of data.</p>
+    <button onClick="foo()"> Click Me</button>
+
+    <p class="c1">This is a class data.</p>
+    <button onClick="foo1()"> Click Me</button>
+
+    <p>This is a Tag data.</p>
+    <button onClick="foo2()"> Click Me</button>
+
+    <div id="container">
+        <h1>This is a heading</h1>
+        <p>This is an paragraph</p>
+    </div>
+    <button onclick="foo3()">Click Me</button>
+
+    <div id="container2">  
+        <p> Nothing in container2 div </p>
+    </div>
+    <button onclick="foo6()">Click Me</button>
+
+    <div class="c2"> Box1    </div>
+    <div class="c2"> Box2    </div>
+    <div class="c2"> Box3    </div>
+    <div class="c2"> Box4    </div>
+    <button onClick="foo4()">Click Me</button>
+    <button onClick="foo5()">Click Me to update all</button>
+
+    
+
+</body>
+<script>
+    function foo()
+    {
+        let element=document.getElementById("id1");
+        element.textContent="Updated id value here";
+    }
+    function foo1()
+    {
+        let element=document.getElementsByClassName("c1")[0];
+        element.style.color="red";
+    }
+    function foo2()
+    {
+        let x=document.getElementsByTagName("p")[0];
+        x.style.backgroundColor="Blue";
+        let y=document.getElementsByTagName("p")[1];
+        y.style.backgroundColor="green";
+        let z=document.getElementsByTagName("p")[2];
+        z.style.backgroundColor="pink";
+
+    }
+    function foo3()
+    {
+        let x=document.getElementById("container");
+        x.innerHTML="<h1> this is updated h1 </h1> <p> this is updated p </p>";
+    }
+    
+
+    function foo4()
+    {
+        let x=document.querySelector(".c2")
+        x.textContent="first one changed.";
+    }
+    function foo5()
+    {
+        let x=document.querySelectorAll(".c2")
+        x.forEach(function(key){
+            key.textContent="updated all boxes";
+        })
+    }
+    function foo6()
+    {
+        let x=document.getElementById("container2");
+        x.innerText="Container2 div is updated here.";
+    }
+    
+</script>
+</html>
+-----------------------------------------------------------------
+FORMS  (onClick  & onSubmit  Examples)
+----------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Form</title>
+    <script>
+        function A(event) {
+            event.preventDefault(); // Prevent form from submitting
+
+            let x = document.getElementById("myform").nm.value;
+
+            console.log(x);  // Corrected console output
+            alert(x);        // Alert works fine
+        }
+
+        function B(){
+            let x=document.getElementsByClassName("c1")[0];
+            x.style.color="red";
+        }
+    </script>
+</head>
+<body>
+    <p class="c1">This is onclick example<p>
+    <button onclick="B()">Click Me</button>
+
+
+    <h2> Form Example-1</h2>
+    <form id="myform" onsubmit="A(event)">
+        <input type="text" name="nm" value="">
+        <input type="submit" value="Submit">
+    </form>
+
+   
+</body>
+</html>
+----------------------------------------------------------------
+FORM with ACTION & Local Storage  Example
+--------------------------------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+</head>
+<body>
+    <h2>Simple Form Example</h2>
+    
+    <form action="form2storage.html" method="get" onsubmit="saveData()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function saveData() {
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+
+            // Store data in localStorage to pass it to process.html
+            localStorage.setItem("name", name);
+            localStorage.setItem("email", email);
+        }
+    </script>
+</body>
+</html>
+----------------------------------------------------------------------
+form2storage.html
+-----------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Data</title>
+</head>
+<body>
+    <h2>Submitted Data</h2>
+    <p><strong>Name:</strong> <span id="displayName"></span></p>
+    <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+
+    <script>
+        // Retrieve data from localStorage
+        document.getElementById("displayName").textContent = localStorage.getItem("name");
+        document.getElementById("displayEmail").textContent = localStorage.getItem("email");
+    </script>
+</body>
+</html>
+-------------------------------------------------------------------------------

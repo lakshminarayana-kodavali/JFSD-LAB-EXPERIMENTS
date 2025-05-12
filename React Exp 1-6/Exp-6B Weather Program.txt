@@ -1,0 +1,47 @@
+Climate.jsx
+-----------------------------------------------------------
+
+import axios from "axios";
+import { useState } from "react";
+export default function Climate()
+{
+    const[result, setResult] = useState(null)
+    if(result== null)
+    axios.get("https://open-weather13.p.rapidapi.com/city/vijayawada/EN", {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "x-rapidapi-ua": "RapidAPI-Playground",
+          "x-rapidapi-key": "199bab6b6msh340c9b8e498a0b1cd8e3bjsnc92bd606ad60",
+          "x-rapidapi-host": "open-weather13.p.rapidapi.com",
+        },
+    })
+        .then((res) => {
+          setResult(res.data.main.temp);
+          console.log(result);
+        });
+      
+        if(result== null)
+        return (
+          <div>
+            This is a Climate Display Page
+            <br />
+            <br />
+            Data is fetching
+          </div>
+        );
+      else
+        return (
+          <div>
+            Vijayawada Temp is: {result}
+          </div>
+        );
+}
+------------------------------------------------------------------------------
+import Climate from './components/Exp6/Climate'
+
+createRoot(document.getElementById('root')).render(
+  <Climate />
+)
+
+------------------------------------------------------------------------

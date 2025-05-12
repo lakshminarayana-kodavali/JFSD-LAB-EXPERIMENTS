@@ -1,0 +1,130 @@
+Insert.jsx
+---------------
+import React from 'react'
+import axios from 'axios';
+
+export default function Insert() {
+
+    function saveData() {
+        var id = document.getElementsByName("idn")[0].value;
+        var name = document.getElementsByName("namen")[0].value;
+    
+        axios.post("http://localhost:8080/product", {
+            "id": parseInt(id),
+            "name": name
+        })
+        .then((res) => {
+            alert(res.data);
+        });
+    }
+
+  return (
+    <div>
+      ID : <input type="text" name="idn" />
+      <br/><br/>
+      Name: <input type="text" name="namen" />
+      <br/><br/>
+      <button onClick={saveData}>SAVE</button>
+    </div>
+  )
+}
+--------------------------------------------------------
+Show.jsx
+--------------------------
+import React, { useState } from 'react';
+import axios from 'axios';
+
+export default function Show() 
+{
+    const [result, setResult] = useState(null);
+
+    if (result == null) {
+        axios.get("http://localhost:8080/product", {})
+        .then((res) => {
+            setResult(res.data);
+        });
+    }
+
+    if (result == null)
+        return (
+            <div>
+                Data is Fetching
+            </div>
+        );
+    else
+        return (
+            <table border={1}>
+                <tr>
+                    <th>ID</th>
+                    <th>NAME</th>
+                </tr>
+                {result.map((element) => {
+                    return (
+                        <tr key={element.id}>
+                            <td>{element.id}</td>
+                            <td>{element.name}</td>
+                        </tr>
+                    );
+                })}
+            </table>
+
+        );
+    
+}
+---------------------------------------------------------
+Delete.jsx
+-------------------------
+import axios from 'axios';
+import React from 'react';
+
+export default function Delete() {
+
+    function deleteData() {
+        var id = document.getElementsByName("idn")[0].value;
+
+        axios.delete(`http://localhost:8080/product/${id}`, {})
+        .then((res) => {
+            alert(res.data);
+        });
+    }
+
+    return (
+        <div>
+            ID: <input type="text" name="idn" />
+            <br/><br/>
+            <button onClick={deleteData}>DELETE</button>
+        </div>
+    );
+}
+-----------------------------------------------------------------
+Update.jsx
+------------------
+import React from 'react'
+import axios from 'axios';
+
+export default function Update() {
+
+    function updateData() {
+        var id = document.getElementsByName("idn")[0].value;
+        var name = document.getElementsByName("namen")[0].value;
+    
+        axios.put("http://localhost:8080/product", {
+            "id": parseInt(id),
+            "name": name
+        })
+        .then((res) => {
+            alert(res.data);
+        });
+    }
+
+  return (
+    <div>
+      ID : <input type="text" name="idn" />
+      <br/><br/>
+      Name: <input type="text" name="namen" />
+      <br/><br/>
+      <button onClick={updateData}>UPDATE</button>
+    </div>
+  )
+}
+-----------------------------------------------------------------

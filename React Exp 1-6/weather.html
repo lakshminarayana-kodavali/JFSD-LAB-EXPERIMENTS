@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <p id="temperature">Loading...</p> <!-- Added an element to display temperature -->
+    <script>
+        const settings = {
+            async: true,
+            crossDomain: true,
+            url: 'https://open-weather13.p.rapidapi.com/city/landon/EN',
+            method: 'GET',
+            headers: {
+                'x-rapidapi-key': 'b33db5ad27mshdabd4d10de7f238p1f681ajsne85e2b10f8a8',
+                'x-rapidapi-host': 'open-weather13.p.rapidapi.com'
+            }
+        }
+        $.ajax(settings).done(function (response) {
+            $('#temperature').text(response.main.temp + ' °C'); // Display temperature
+        });
+    </script> 
+</body>
+</html>
+-------------------------------------------

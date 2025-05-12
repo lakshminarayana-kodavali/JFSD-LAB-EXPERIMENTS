@@ -1,0 +1,88 @@
+// Parent.jsx
+import React, { useState } from 'react';
+import Child from './Child.jsx';
+
+export default function Parent() {
+    const [name, setName] = useState("name1");
+    const [salary, setSalary] = useState(100);
+    const [location, setLocation] = useState("Location-1");
+
+    const changeUser = (n, s, l) => {
+        setName(n);
+        setSalary(s);
+        setLocation(l);
+    };
+
+    return (
+        <div>
+            <div>
+                <h3>User Information</h3>
+                Name: {name}
+                <br />
+                Salary: <i className="fa fa-rupee"></i> {salary}
+                <br />
+                Location: {location}
+            </div>
+            <br /><br /><br />
+            <Child changeUser={changeUser} a={10} b={20} />
+        </div>
+    );
+}
+
+// Child.jsx
+import React, { useState } from 'react';
+
+export default function Child({ changeUser, a, b }) {
+    const [inputName, setInputName] = useState("");
+    const [inputSalary, setInputSalary] = useState("");
+    const [inputLocation, setInputLocation] = useState("");
+
+    const changeFun = () => {
+        changeUser(inputName, inputSalary, inputLocation);
+    };
+
+    return (
+        <div>
+            <h3>Update User Information</h3>
+            Name: <input type="text" value={inputName} onChange={(e) => setInputName(e.target.value)} />
+            <br />
+            Salary: <input type="text" value={inputSalary} onChange={(e) => setInputSalary(e.target.value)} />
+            <br />
+            Location: <input type="text" value={inputLocation} onChange={(e) => setInputLocation(e.target.value)} />
+            <br />
+            <button onClick={changeFun}>Update User</button>
+            <br />
+            <p>
+                Props Received: {a} - {b}
+            </p>
+        </div>
+    );
+}
+
+// main.jsx
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import Parent from './Components/Parent.jsx';
+
+createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <Parent />
+    </React.StrictMode>
+);
+
+// index.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

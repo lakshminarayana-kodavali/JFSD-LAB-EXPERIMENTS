@@ -1,0 +1,117 @@
+Exp-6A : Receiving data through Axios
+----------------=----
+User.jsx
+-------------------
+import axios from "axios"
+import { useState } from "react";
+export default function User(){
+    //post -> used to insert the data or send the data
+    //get -> retrieve the data
+    //delete-> delete the data
+    //put -> update the data
+    //patch -> particularly update the data
+    //var result = "nothing";
+    const[result, setResult]=useState("nothing")
+    if(result=="nothing")
+    {
+        axios.get("https://reqres.in/api/users",{}).then((res)=>{
+            
+            setResult(res.data.data)
+            console.log(result)
+        })
+    }
+
+    if(result!="nothing")
+    return(
+        <div>
+            This is user page <br/><br/>
+            <table border={1} style={{textAlign:'center'}}>
+                <tr>
+                    <th>ID</th>
+                    <th>EMAIL</th>
+                    <th>FIRST NAME</th>
+                    <th>LAST NAME</th>
+                    <th>IMAGE</th>
+                </tr>
+                {result.map((element, index) => {
+                    return (
+                    <tr key={index}>
+                        <td>{element.id}</td>
+                        <td>{element.email}</td>        
+                        <td>{element.first_name}</td>
+                        <td>{element.last_name}</td>
+                        <td>
+                        <img src={element.avatar} alt="error" width={75} height={75} />
+                        </td>
+                    </tr>
+                    );
+                })}
+            </table>
+
+        </div>
+    )
+    else
+    return(
+        <div>
+            Fetching the data...
+        </div>
+    )
+}
+-------------------------------------------------------
+main.jsx
+--------------------------------------------------------
+import User from './components/Exp6/User'
+
+createRoot(document.getElementById('root')).render(
+  <User />
+)
+--------------------------------------------------------
+Api_Products.jsx
+-----------------------------------------------------
+
+import { useEffect, useState } from 'react'; 
+import axios from 'axios'; 
+ 
+const Api_Products = () => { 
+  const [products, setProducts] = useState([]); 
+ 
+  useEffect(() => { 
+    const fetchData = async () => { 
+      try { 
+        const response = await axios.get('https://fakestoreapi.com/products'); 
+        setProducts(response.data); 
+      } catch (error) { 
+        console.error("Error fetching data: ", error); 
+      } 
+    }; 
+ 
+    fetchData(); 
+  }, []); 
+ 
+  return ( 
+    <div> 
+      <h1>Mock Data Products</h1> 
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}> 
+        {products.map(product => ( 
+          <div key={product.id} style={{ border: '1px solid #ccc', padding: '10px', width: '250px' }}> 
+            <img src={product.image} alt={product.title} style={{ width: '100%', height: '450px', objectFit: 'cover' }} /> 
+            <h3>{product.title}</h3> 
+            <p>{product.description}</p> 
+            <p>Price: ${product.price}</p> 
+          </div> 
+        ))} 
+      </div> 
+    </div> 
+  ); 
+}; 
+ 
+export default Api_Products;
+-------------------------------------------------------------------------------------
+main.jsx
+--------------------------------------------------------
+import Api_Products from './components/Exp6/Api_Products'
+
+createRoot(document.getElementById('root')).render(
+  <Api_Products />
+)
+--------------------------------------------------------

@@ -1,0 +1,148 @@
+EXPERIMENT 7 (SpringBoot Annotations with Postman APP)
+------------------------------------------------------------------
+In src/main/java under com.klu create AppController.java
+-------------------------------------------------------------------
+AppController.java
+----------------------------------------------------------------------
+package com.klu;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import jakarta.websocket.server.PathParam;
+
+@Controller
+public class AppController {
+	
+	//http://localhost:8080/demo1
+	@GetMapping("/demo1")
+	@ResponseBody
+	public int fun1() {
+		return 10;
+	}
+	
+	//http://localhost:8080/demo2
+	@GetMapping("/demo2")
+	@ResponseBody
+	public double fun2() {
+		return 10.5;
+	}
+	
+	//http://localhost:8080/demo3
+	@GetMapping("/demo3")
+	public String fun3() {
+		return "First.html";
+	}
+	
+	//http://localhost:8080/demo4
+	@GetMapping("/demo4")
+	@ResponseBody
+	public String fun4() {
+		String univ = "KLEF";
+		return " I study at " + univ;
+	}
+	
+	//http://localhost:8080/demo5/123
+	@GetMapping("/demo5/{id}")
+	@ResponseBody
+	public String fun5(@PathVariable ("id") int id) {
+		return "" + id ;
+	}
+	
+	//http://localhost:8080/demo6/120/45
+	@GetMapping("/demo6/{a}/{b}")  
+	@ResponseBody  
+	public String fun6(@PathVariable("a") int a, @PathVariable("b") int b) {   
+	    return " " + (a+b);  
+	}
+	
+	//http://localhost:8080/demo7?id=150
+	@GetMapping("/demo7")
+	@ResponseBody
+	public String fun7(@PathParam ("id") int id) {
+		return "" + id ;
+	}
+	
+	//http://localhost:8080/demo8/RAMA
+	@GetMapping("/demo8/{name}")
+	@ResponseBody
+	public String fun8(@PathVariable ("name") String name ) {
+		return name ;
+	}
+	
+	List<User> l = new ArrayList<>();
+	
+	//From Postman App: POST - http://localhost:8080/demo8 ; BODY RAW : {"id":111,"name":"RAMA"}
+	@PostMapping("/demo8")
+	@ResponseBody
+	public String fun9(@RequestBody User user) {
+		l.add(user);
+		return "User Added" ;
+	}
+	
+	//http://localhost:8080/demo8
+	@GetMapping("/demo8")
+	@ResponseBody
+	public List<User> fun10() {
+		return l ;
+	}
+
+}
+-----------------------------------------------------------------------------------------
+
+In src under main: create WebApp folder
+In WebApp folder, create First.html file
+
+First.html
+---------------
+<html>
+<body>
+	This is a First HTML Page
+</body>
+</html>
+
+
+------------------------------------------------------------------------------------------
+In com.klu create your Own User.java
+
+User.java
+------------------------------
+package com.klu;
+
+public class User {
+    
+	int id;
+	String name;
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + "]";
+	}
+
+}
+
+--------------------------------------------------------------------------------------

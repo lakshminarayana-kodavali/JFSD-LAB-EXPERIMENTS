@@ -1,0 +1,28 @@
+
+create a folder (FSD)
+enter into that folder
+open visula studio from that folder (code .)
+open terminal -> command prompt
+Execute the cmd: npm create vite@latest
+  choose React, Javascript
+   project name: Basics
+   package name: basics
+   
+cd Basics
+npm install
+npm run dev 
+------------------------------------------
+create First.jsx component in the src folder
+---------------------------------------------
+shortcut: rafce    to get code
+write <h1> First react project</h1>  inside <div> tag
+-----------------------------------------------
+main.jsx
+----------------
+import First from './components/First'
+
+createRoot(document.getElementById('root')).render(
+  <First/>
+)
+-----------------------------------
+

@@ -1,0 +1,314 @@
+Experiment 5  (Login Page with Bootstrap and Material UI)
+--------------------------------------------------------------
+
+following is the command to install from the project foldler:
+--------------------------------------------------------------------------
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
+---------------------------------------------------------------------------
+Bootstrap.jsx
+-----------------------------
+
+import './style.css';
+import ResponsiveAppBar from './AppBar1';
+export default function Bootstrap(){
+    function Mover(){
+        document.getElementById("login").className='Mover-Login'
+
+    }
+    function Mleave(){
+        document.getElementById("login").className='login-form'
+
+    }
+    return (
+        <div className='parent'>
+            <ResponsiveAppBar/>
+            <center>
+            <div  className='login-form' onMouseOver={Mover} onMouseLeave={Mleave} id="login">
+                <table >
+                <tr>
+                    <td colSpan={2}style={{ backgroundColor: 'yellowgreen'}}> Login Page</td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text"  className = 'form-control' name ="t1" id ="un"></input></td>
+                </tr>
+                <tr>
+                    <td>Password: </td>
+                    <td><input type ="text" className = 'form-control' name="t2" id="pwd"/> </td>
+                </tr>
+                <tr>
+                    <td>Role: </td>
+                    <td><select className="form-control" id="sel1">
+                        <option value={1}>Admin</option>
+                        <option value={2}>User</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td colSpan={2}><button className="btn btn-success" > Login</button></td>
+                </tr>
+            </table>
+            </div>
+            </center>
+        </div>
+    );
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+style.css
+-------------------------------------------------
+.login-form{
+    border: 1px solid red;
+    margin: 50px;
+    width: 20vw;
+    height: auto;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 2px 2px 3px yellow,-2px -2px 3px yellowgreen;
+    border-radius: 20px;
+}
+.Mover-Login{
+    border: 1px solid red;
+    margin: 50px;
+    width: 25vw;
+    height: auto;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 2px 2px 7px yellow,-2px -2px 7px yellowgreen;
+    border-radius: 20px;
+}
+table{
+    width: 100%;
+}
+
+td{
+    padding: 5px;
+    border-radius: 10px;
+}
+.parent{
+    border: 1px solid red;
+    width:80vw;
+    padding: 10px;
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+index.html 
+-------------------------------------------------------
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+AppBar1.jsx
+----------------------
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+
+const pages = ['Products', 'Pricing', 'Blog'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+function ResponsiveAppBar() {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  return (
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{ display: { xs: 'block', md: 'none' } }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            LOGO
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+}
+export default ResponsiveAppBar;
+
+----------------------------------------------------------------------------
+main.jsx
+------------------------------------------------
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import Display from './components/Exp4/Display'
+//import App from './App.jsx'
+
+import Bootstrap from './components/Exp5/Bootstrap.jsx'
+
+createRoot(document.getElementById('root')).render(
+  <Bootstrap />
+)
+---------------------------------------------------------------------------
+Following are only instructions to understand. No need to copy anywhere.
+----------------------------------------------------------------------------
+Bootstrap links (included in the index.html)
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+----------------------------------------------------------------------------------------
+
+Search in google : Material UI Responsive Appbar
+---------------------------------------------------------------
+https://mui.com/material-ui
+install packages which are present below the "Get Started" button
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material
+Then goto AppBar components and select which you like
+https://mui.com/material-ui/react-app-bar/
+copy and paste that code as follows:
+--------------------------------------------------------------------
+   
